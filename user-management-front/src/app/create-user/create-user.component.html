@@ -1,0 +1,55 @@
+<div class="wrap-login">
+    <div class="container">
+      <form class="" [formGroup]="form" (ngSubmit)="onSubmit()">
+        <mat-card class="login-box">
+          <mat-card-content>
+            <h2 mat-dialog-title>{{ title() }}</h2>
+            <mat-form-field appearance="outline" *ngIf="isNew">
+              <mat-label>Username</mat-label>
+              <input matInput placeholder="Enter your username" formControlName="username" required
+                     class="form-field">
+            </mat-form-field>
+            <mat-form-field appearance="outline" *ngIf="isNew">
+              <mat-label>Secret</mat-label>
+              <input type="password" matInput placeholder="Enter your password" formControlName="secret" required
+                     class="form-field">
+              <mat-error *ngIf="form.get('secret')?.hasError('required')">Password is required</mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>Name</mat-label>
+              <input matInput placeholder="Enter your name" formControlName="name" required
+                     class="form-field">
+              <mat-error *ngIf="form.get('name')?.hasError('required')">Name is required</mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>Birth date</mat-label>
+              <mat-form-field>
+                <input placeholder="Enter your birth date" matInput [matDatepicker]="picker" formControlName="birthDate">
+                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+              </mat-form-field>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>Phone</mat-label>
+              <input matInput placeholder="Enter your phone number" formControlName="phone"
+                     class="form-field">
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>E-mail</mat-label>
+              <input matInput placeholder="Enter your e-mail" formControlName="email"
+                     class="form-field">
+            </mat-form-field>
+            <mat-form-field appearance="outline" *ngIf="!isNew && user && user.profile">
+              <mat-label>Profile</mat-label>
+              <input matInput class="form-field" formControlName="profile">
+            </mat-form-field>
+          </mat-card-content>
+          <mat-card-actions>
+            <button mat-raised-button color="primary">{{ isNew ? 'Save': 'Update' }}</button>
+            <a mat-button target="_blank" (click)="onCancel()">Cancel</a>
+          </mat-card-actions>
+        </mat-card>
+      </form>
+    </div>
+  </div>
+  
