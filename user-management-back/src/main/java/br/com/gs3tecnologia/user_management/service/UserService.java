@@ -104,27 +104,6 @@ public class UserService {
                         repository.save(user));
     }
 
-    public void createDefaultUser() {
-        if (!repository.findByUsername("admin").isPresent()) {
-            var profileRequestDTO = new ProfileRequestDTO("admin", "admin");
-
-            String profileId = profileService.createProfile(profileRequestDTO);
-            var profile = new ProfileEntity();
-            profile.setId(profileId);
-
-            var user = new UserEntity();
-            user.setName("Admin");
-            user.setPhone("1111111");
-            user.setSecret(passwordEncoder.encode("12345"));
-            user.setEmail("admin@userapp.com");
-            user.setBirthDate(LocalDate.of(1987, 02, 10));
-            user.setUsername("admin");
-            user.setProfile(profile);
-
-            repository.save(user);
-        }
-    }
-
     private UserEntity getUserById(String id) {
         return repository.findById(id)
                 .orElseThrow(() -> new UserNotFoundException("""
